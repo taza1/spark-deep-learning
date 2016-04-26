@@ -17,14 +17,12 @@
 
 package it.databiz.spark.deep.learning
 
-import MnistConf._
+import it.databiz.spark.deep.learning.MnistConf._
 import org.apache.spark.{SparkConf, SparkContext}
 import org.deeplearning4j.datasets.iterator.impl.MnistDataSetIterator
-import org.deeplearning4j.eval.Evaluation
 import org.deeplearning4j.nn.conf.layers.setup.ConvolutionLayerSetup
 import org.deeplearning4j.nn.multilayer.MultiLayerNetwork
 import org.deeplearning4j.spark.impl.multilayer.SparkDl4jMultiLayer
-import org.nd4j.linalg.dataset.DataSet
 import org.slf4j.LoggerFactory
 
 /**
@@ -64,7 +62,7 @@ object MnistExample extends App {
     // We are training with approximately 'batchSize' examples on each executor core
     val network = sparkNeuralNetwork.fitDataSet(sparkTrainingData, numCores * batchSize)
     log.info("--- Epoch " + i + " complete ---")
-    log.info(getNetworkEvaluation(network, testSet).stats)
+    log.info(network.evaluateOn(testSet).stats)
   }
 
   log.info("--- Training finished --- ")
@@ -96,22 +94,5 @@ object MnistExample extends App {
     neuralNetwork.setUpdater(null)
     neuralNetwork
   }
-
-  /**
-    * Returns an Evaluation of the Convolutional Neural Network on the test set.
-    *
-    * @param network the Convolutional Neural Network to evaluate.
-    * @param testSet the MNIST test set on which to perform the evaluation.
-    * @return an Evaluation of the Convolutional Neural Network on the test set.
-    */
-  def getNetworkEvaluation(network: MultiLayerNetwork, testSet: Seq[DataSet]): Evaluation[Nothing] = {
-    val eval = new Evaluation()
-    testSet.foreach { ds =>
-      val output = network.output(ds.getFeatureMatrix)
-      eval.eval(ds.getLabels, output)
-    }
-    eval
-  }
-
 
 }

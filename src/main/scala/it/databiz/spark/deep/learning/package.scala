@@ -1,6 +1,8 @@
 package it.databiz.spark.deep
 
 import org.deeplearning4j.datasets.iterator.impl.MnistDataSetIterator
+import org.deeplearning4j.eval.Evaluation
+import org.deeplearning4j.nn.multilayer.MultiLayerNetwork
 import org.nd4j.linalg.dataset.DataSet
 
 import scala.collection.JavaConverters._
@@ -34,6 +36,25 @@ package object learning {
       val allData = mnistIterator.asScala.toSeq
       val shuffledData = scala.util.Random.shuffle(allData)
       shuffledData.splitAt(numForTraining)
+    }
+
+  }
+
+  implicit class MultiLayerNetworkOps(network: MultiLayerNetwork) {
+
+    /**
+      * Returns an Evaluation of the Convolutional Neural Network on the test set.
+      *
+      * @param testSet the MNIST test set on which to perform the evaluation.
+      * @return an Evaluation of the Convolutional Neural Network on the test set.
+      */
+    def evaluateOn(testSet: Seq[DataSet]): Evaluation[Nothing] = {
+      val eval = new Evaluation()
+      testSet.foreach { ds =>
+        val output = network.output(ds.getFeatureMatrix)
+        eval.eval(ds.getLabels, output)
+      }
+      eval
     }
 
   }
