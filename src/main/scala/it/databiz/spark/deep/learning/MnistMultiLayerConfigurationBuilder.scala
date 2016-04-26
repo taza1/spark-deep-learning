@@ -17,12 +17,12 @@
 
 package it.databiz.spark.deep.learning
 
+import it.databiz.spark.deep.learning.Conf._
 import org.deeplearning4j.nn.api.OptimizationAlgorithm
 import org.deeplearning4j.nn.conf.layers.{ConvolutionLayer, DenseLayer, OutputLayer, SubsamplingLayer}
 import org.deeplearning4j.nn.conf.{MultiLayerConfiguration, NeuralNetConfiguration, Updater}
 import org.deeplearning4j.nn.weights.WeightInit
 import org.nd4j.linalg.lossfunctions.LossFunctions
-import MnistConf._
 
 /**
   * A dedicated MultiLayerConfiguration Builder for the MNIST Example.

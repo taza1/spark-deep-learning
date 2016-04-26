@@ -17,7 +17,7 @@
 
 package it.databiz.spark.deep.learning
 
-import it.databiz.spark.deep.learning.MnistConf._
+import it.databiz.spark.deep.learning.Conf._
 import org.apache.spark.{SparkConf, SparkContext}
 import org.deeplearning4j.datasets.iterator.impl.MnistDataSetIterator
 import org.deeplearning4j.nn.conf.layers.setup.ConvolutionLayerSetup

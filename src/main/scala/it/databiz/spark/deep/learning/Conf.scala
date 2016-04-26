@@ -26,7 +26,7 @@ import com.typesafe.config._
   *
   * Created by Vincibean <andrebessi00@gmail.com> on 19/03/16.
   */
-object MnistConf {
+object Conf {
 
   // Load the configuration values from the default location: application.conf
   val conf = ConfigFactory.load()
