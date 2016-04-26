@@ -25,11 +25,11 @@ import org.deeplearning4j.nn.weights.WeightInit
 import org.nd4j.linalg.lossfunctions.LossFunctions
 
 /**
-  * A dedicated MultiLayerConfiguration Builder for the MNIST Example.
+  * A dedicated MultiLayerConfiguration Builder for the MNIST dataset.
   *
   * Created by Vincibean <andrebessi00@gmail.com> on 20/03/16.
   */
-object MnistMultiLayerConfigurationBuilder extends MultiLayerConfiguration.Builder {
+object MultiLayerConfigurationBuilder extends MultiLayerConfiguration.Builder {
 
   def apply(): MultiLayerConfiguration.Builder = new NeuralNetConfiguration.Builder()
     .seed(seed)

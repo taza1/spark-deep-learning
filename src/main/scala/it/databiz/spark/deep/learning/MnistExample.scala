@@ -86,7 +86,7 @@ object MnistExample extends App {
     * @return a fully configured MultiLayerNetwork
     */
   def prepareNeuralNetwork(height: Int, width: Int, numChannels: Int): MultiLayerNetwork = {
-    val modelBuilder = MnistMultiLayerConfigurationBuilder()
+    val modelBuilder = MultiLayerConfigurationBuilder()
     new ConvolutionLayerSetup(modelBuilder, height, width, numChannels)
     val modelConfig = modelBuilder.build()
     val neuralNetwork = new MultiLayerNetwork(modelConfig)
