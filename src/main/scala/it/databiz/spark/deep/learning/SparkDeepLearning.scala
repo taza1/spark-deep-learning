@@ -31,7 +31,7 @@ import org.slf4j.LoggerFactory
   *
   * Created by Vincibean <andrebessi00@gmail.com> on 19/03/16.
   */
-object MnistExample extends App {
+object SparkDeepLearning extends App {
   // Create logger
   val log = LoggerFactory.getLogger("it.databiz.spark.deep.learning.MnistExample")
 
