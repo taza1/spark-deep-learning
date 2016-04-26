@@ -33,7 +33,7 @@ import org.slf4j.LoggerFactory
   */
 object MnistExample extends App {
   // Create logger
-  val log = LoggerFactory.getLogger("it.databiz.spark.dl.MnistExample")
+  val log = LoggerFactory.getLogger("it.databiz.spark.deep.learning.MnistExample")
 
   // Create Spark context
   val sc = new SparkContext(new SparkConf()
