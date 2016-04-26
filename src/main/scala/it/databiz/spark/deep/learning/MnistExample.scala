@@ -69,7 +69,7 @@ object MnistExample extends App {
 
   log.info("--- Saving model --- ")
 
-  val writing = NeuralNetworkWriter.write(neuralNetwork)
+  val writing = neuralNetwork.write()
 
   if (writing.isSuccess) {
     log.info("--- Model saved --- ")

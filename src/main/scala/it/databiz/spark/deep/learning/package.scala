@@ -1,11 +1,17 @@
 package it.databiz.spark.deep
 
+import java.io.{DataOutputStream, File}
+import java.nio.file.{Files, Paths}
+
+import org.apache.commons.io.FileUtils
 import org.deeplearning4j.datasets.iterator.impl.MnistDataSetIterator
 import org.deeplearning4j.eval.Evaluation
 import org.deeplearning4j.nn.multilayer.MultiLayerNetwork
 import org.nd4j.linalg.dataset.DataSet
+import org.nd4j.linalg.factory.Nd4j
 
 import scala.collection.JavaConverters._
+import scala.util.Try
 
 /**
   * Container object of Scala implicits to use in order to train a Convolutional Neural Network
@@ -40,6 +46,9 @@ package object learning {
 
   }
 
+  /**
+    * MultiLayerNetwork wrapper, provides a set of utility methods to Artificial Neural Networks.
+    */
   implicit class MultiLayerNetworkOps(network: MultiLayerNetwork) {
 
     /**
@@ -55,6 +64,20 @@ package object learning {
         eval.eval(ds.getLabels, output)
       }
       eval
+    }
+
+    /**
+      * Saves the Artificial Neural Network's configurations and coefficients on disk.
+      *
+      * @return a Try monad indicating if the computation resulted in an Exception or not.
+      */
+    def write(): Try[Unit] = Try {
+      //Write the network parameters:
+      val output = new DataOutputStream(Files.newOutputStream(Paths.get("coefficients.bin")))
+      Nd4j.write(network.params(), output)
+
+      //Write the network configuration:
+      FileUtils.write(new File("conf.json"), network.getLayerWiseConfigurations.toJson)
     }
 
   }
