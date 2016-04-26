@@ -15,7 +15,7 @@
   * along with this program.  If not, see <http://www.gnu.org/licenses/>.
   */
 
-package it.databiz.spark.dl
+package it.databiz.spark.deep.learning
 
 import org.deeplearning4j.nn.api.OptimizationAlgorithm
 import org.deeplearning4j.nn.conf.layers.{ConvolutionLayer, DenseLayer, OutputLayer, SubsamplingLayer}

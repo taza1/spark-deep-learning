@@ -1,4 +1,4 @@
-package it.databiz.spark
+package it.databiz.spark.deep
 
 import org.deeplearning4j.datasets.iterator.impl.MnistDataSetIterator
 import org.nd4j.linalg.dataset.DataSet
@@ -11,7 +11,7 @@ import scala.collection.JavaConverters._
   *
   * Created by Vincibean <andrebessi00@gmail.com> on 26/03/16.
   */
-package object dl {
+package object learning {
 
   /**
     * MnistDataSetIterator wrapper, loads the dataset that should be used in order to

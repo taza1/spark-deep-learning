@@ -15,7 +15,7 @@
   * along with this program.  If not, see <http://www.gnu.org/licenses/>.
   */
 
-package it.databiz.spark.dl
+package it.databiz.spark.deep.learning
 
 import java.io.{DataOutputStream, File}
 import java.nio.file.{Files, Paths}

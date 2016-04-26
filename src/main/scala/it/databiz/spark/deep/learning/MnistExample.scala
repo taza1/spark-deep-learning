@@ -15,9 +15,9 @@
   * along with this program.  If not, see <http://www.gnu.org/licenses/>.
   */
 
-package it.databiz.spark.dl
+package it.databiz.spark.deep.learning
 
-import it.databiz.spark.dl.MnistConf._
+import MnistConf._
 import org.apache.spark.{SparkConf, SparkContext}
 import org.deeplearning4j.datasets.iterator.impl.MnistDataSetIterator
 import org.deeplearning4j.eval.Evaluation
