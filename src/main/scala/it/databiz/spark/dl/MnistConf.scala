@@ -41,7 +41,7 @@ object MnistConf {
   def epochs = conf.getInt("neural-network.epochs")
 
   // Load the dataset information.
-  def numSamples = conf.getInt("dataset.total")
+  implicit def numSamples = conf.getInt("dataset.total")
   def numForTraining = conf.getInt("dataset.training")
   def outputNum = conf.getInt("dataset.classes")
 

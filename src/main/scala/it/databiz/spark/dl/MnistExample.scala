@@ -19,6 +19,7 @@ package it.databiz.spark.dl
 
 import it.databiz.spark.dl.MnistConf._
 import org.apache.spark.{SparkConf, SparkContext}
+import org.deeplearning4j.datasets.iterator.impl.MnistDataSetIterator
 import org.deeplearning4j.eval.Evaluation
 import org.deeplearning4j.nn.conf.layers.setup.ConvolutionLayerSetup
 import org.deeplearning4j.nn.multilayer.MultiLayerNetwork
@@ -36,15 +37,15 @@ object MnistExample extends App {
   // Create logger
   val log = LoggerFactory.getLogger("it.databiz.spark.dl.MnistExample")
 
-  // Create spark context
+  // Create Spark context
   val sc = new SparkContext(new SparkConf()
     .setMaster("local[" + numCores + "]")     // Edit this line if you intend to use a different master node.
     .setAppName("Spark-Deep-Learning")
     .set(SparkDl4jMultiLayer.AVERAGE_EACH_ITERATION, String.valueOf(true)))
 
-  // Load data into memory
+  // Load data into Spark
   log.info("--- Loading data --- ")
-  val (trainingSet, testSet) = MnistDataSet.dataset(numForTraining)
+  val (trainingSet, testSet) = new MnistDataSetIterator(1, numSamples, true).splitDatasetAt(numForTraining)
   val sparkTrainingData = sc.parallelize(trainingSet)
     .cache()
 
