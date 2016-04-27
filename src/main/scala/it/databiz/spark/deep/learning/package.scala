@@ -71,7 +71,7 @@ package object learning {
       *
       * @return a Try monad indicating if the computation resulted in an Exception or not.
       */
-    def write(): Try[Unit] = Try {
+    def saveAsFiles(): Try[Unit] = Try {
       //Write the network parameters:
       val output = new DataOutputStream(Files.newOutputStream(Paths.get("coefficients.bin")))
       Nd4j.write(network.params(), output)

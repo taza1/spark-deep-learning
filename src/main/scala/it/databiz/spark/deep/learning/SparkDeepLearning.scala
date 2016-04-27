@@ -69,7 +69,7 @@ object SparkDeepLearning extends App {
 
   log.info("--- Saving model --- ")
 
-  val writing = neuralNetwork.write()
+  val writing = neuralNetwork.saveAsFiles()
 
   if (writing.isSuccess) {
     log.info("--- Model saved --- ")
