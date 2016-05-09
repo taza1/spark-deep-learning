@@ -25,50 +25,51 @@ import org.deeplearning4j.nn.weights.WeightInit
 import org.nd4j.linalg.lossfunctions.LossFunctions
 
 /**
-  * A dedicated MultiLayerConfiguration Builder for the MNIST dataset.
+  * A dedicated MultiLayerConfiguration Builder to use in order to train a Convolutional Neural Network
+  * from the MNIST dataset, taking advantage of Apache Spark's cluster computing.
   *
   * Created by Vincibean <andrebessi00@gmail.com> on 20/03/16.
   */
 object MultiLayerConfigurationBuilder extends MultiLayerConfiguration.Builder {
 
   def apply(): MultiLayerConfiguration.Builder = new NeuralNetConfiguration.Builder()
-    .seed(seed)
-    .iterations(iterations)
-    .regularization(true)
-    .l2(0.0005)
-    .learningRate(0.1)
-    .optimizationAlgo(OptimizationAlgorithm.STOCHASTIC_GRADIENT_DESCENT)
-    .updater(Updater.ADAGRAD)
-    .list(6)
+    .seed(seed) // Random number generator seed. Used for reproducibility between runs.
+    .iterations(iterations) // Number of optimization iterations.
+    .regularization(true) // Whether to use regularization (L1, L2, dropout, etc...)
+    .l2(0.0005) // L2 regularization coefficient.
+    .learningRate(0.1) // Learning rate.
+    .optimizationAlgo(OptimizationAlgorithm.STOCHASTIC_GRADIENT_DESCENT) // Optimization algorithm to use.
+    .updater(Updater.ADAGRAD) // Gradient updater.
+    .list(6) // Number of layers (not including the input layer).
     .layer(0, new ConvolutionLayer.Builder(5, 5)
-      .nIn(numChannels)
+    .nIn(numChannels) // Number of input neurons (channels).
       .stride(1, 1)
-      .nOut(20)
-      .weightInit(WeightInit.XAVIER)
-      .activation("relu")
+    .nOut(20) // Number of output neurons.
+    .weightInit(WeightInit.XAVIER) // Weight initialization scheme. The Xavier algorithm automatically determines the scale of initialization based on the number of input and output neurons.
+    .activation("relu") // Activation function: rectified linear, an activation function defined as f(x) = max(0, x).
       .build())
     .layer(1, new SubsamplingLayer.Builder(SubsamplingLayer.PoolingType.MAX, Array(2, 2))
       .build())
     .layer(2, new ConvolutionLayer.Builder(5, 5)
-      .nIn(20)
-      .nOut(50)
+      .nIn(20) // Number of input neurons (channels).
+      .nOut(50) // Number of output neurons.
       .stride(2, 2)
-      .weightInit(WeightInit.XAVIER)
-      .activation("relu")
+      .weightInit(WeightInit.XAVIER) // Weight initialization scheme. The Xavier algorithm automatically determines the scale of initialization based on the number of input and output neurons.
+      .activation("relu") // Activation function: rectified linear, an activation function defined as f(x) = max(0, x).
       .build())
     .layer(3, new SubsamplingLayer.Builder(SubsamplingLayer.PoolingType.MAX, Array(2, 2))
       .build)
     .layer(4, new DenseLayer.Builder()
-      .activation("relu")
-      .weightInit(WeightInit.XAVIER)
-      .nOut(200)
+      .activation("relu") // Activation function: rectified linear, an activation function defined as f(x) = max(0, x).
+      .weightInit(WeightInit.XAVIER) // Weight initialization scheme. The Xavier algorithm automatically determines the scale of initialization based on the number of input and output neurons.
+      .nOut(200) // Number of output neurons.
       .build())
     .layer(5, new OutputLayer.Builder(LossFunctions.LossFunction.NEGATIVELOGLIKELIHOOD)
-      .nOut(outputNum)
-      .weightInit(WeightInit.XAVIER)
-      .activation("softmax")
+      .nOut(outputNum) // Number of output neurons.
+      .weightInit(WeightInit.XAVIER) // Weight initialization scheme. The Xavier algorithm automatically determines the scale of initialization based on the number of input and output neurons.
+      .activation("softmax") // Activation function. The softmax function, or normalized exponential, is a generalization of the logistic function that "squashes" a K-dimensional vector of arbitrary real values to a K-dimensional vector of real values in the range (0, 1) that adds up to 1.
       .build())
-    .backprop(true)
-    .pretrain(false)
+    .backprop(true) // Whether to use backpropagation.
+    .pretrain(false) // Whether to pretrain the Convolutional Neural Network.
 
 }
