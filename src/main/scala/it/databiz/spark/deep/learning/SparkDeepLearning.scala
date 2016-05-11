@@ -31,50 +31,53 @@ import org.slf4j.LoggerFactory
   *
   * Created by Vincibean <andrebessi00@gmail.com> on 19/03/16.
   */
-object SparkDeepLearning extends App {
-  // Create logger
-  val log = LoggerFactory.getLogger("it.databiz.spark.deep.learning.MnistExample")
+object SparkDeepLearning {
 
-  // Create Spark context
-  val sc = new SparkContext(new SparkConf()
-    .setMaster(s"local[$numCores]")     // Edit this line if you intend to use a different master node.
-    .setAppName("Spark-Deep-Learning")
-    .set(SparkDl4jMultiLayer.AVERAGE_EACH_ITERATION, String.valueOf(true)))
+  def main(args: Array[String]): Unit = {
+    // Create logger
+    val log = LoggerFactory.getLogger("it.databiz.spark.deep.learning.MnistExample")
 
-  // Load data into Spark
-  log.info("--- Loading data --- ")
-  val (trainingSet, testSet) = new MnistDataSetIterator(1, numSamples, true).splitDatasetAt(numForTraining)
-  val sparkTrainingData = sc.parallelize(trainingSet)
-    .cache()
+    // Create Spark context
+    val sc = new SparkContext(new SparkConf()
+      .setMaster(s"local[$numCores]") // Edit this line if you intend to use a different master node.
+      .setAppName("Spark-Deep-Learning")
+      .set(SparkDl4jMultiLayer.AVERAGE_EACH_ITERATION, String.valueOf(true)))
 
-  // Set up network configuration:
-  // prepare the neural network
-  log.info("--- Preparing neural network --- ")
-  val neuralNetwork = prepareNeuralNetwork(height, width, numChannels)
+    // Load data into Spark
+    log.info("--- Loading data --- ")
+    val (trainingSet, testSet) = new MnistDataSetIterator(1, numSamples, true).splitDatasetAt(numForTraining)
+    val sparkTrainingData = sc.parallelize(trainingSet)
+      .cache()
 
-  // Create Spark multi layer network from configuration
-  val sparkNeuralNetwork = new SparkDl4jMultiLayer(sc, neuralNetwork)
+    // Set up network configuration:
+    // prepare the neural network
+    log.info("--- Preparing neural network --- ")
+    val neuralNetwork = prepareNeuralNetwork(height, width, numChannels)
 
-  // Train network
-  log.info("--- Starting neural network training ---")
+    // Create Spark multi layer network from configuration
+    val sparkNeuralNetwork = new SparkDl4jMultiLayer(sc, neuralNetwork)
 
-  (0 to epochs).foreach { i =>
-    // We are training with approximately 'batchSize' examples on each executor core
-    val network = sparkNeuralNetwork.fitDataSet(sparkTrainingData, numCores * batchSize)
-    log.info(s"--- Epoch $i complete ---")
-    log.info(network.evaluateOn(testSet).stats)
-  }
+    // Train network
+    log.info("--- Starting neural network training ---")
 
-  log.info("--- Training finished --- ")
+    (0 to epochs).foreach { i =>
+      // We are training with approximately 'batchSize' examples on each executor core
+      val network = sparkNeuralNetwork.fitDataSet(sparkTrainingData, numCores * batchSize)
+      log.info(s"--- Epoch $i complete ---")
+      log.info(network.evaluateOn(testSet).stats)
+    }
 
-  log.info("--- Saving model --- ")
+    log.info("--- Training finished --- ")
 
-  val writing = neuralNetwork.saveAsFiles()
+    log.info("--- Saving model --- ")
 
-  if (writing.isSuccess) {
-    log.info("--- Model saved --- ")
-  } else {
-    log.error("--- Could not save model ---")
+    val writing = neuralNetwork.saveAsFiles()
+
+    if (writing.isSuccess) {
+      log.info("--- Model saved --- ")
+    } else {
+      log.error("--- Could not save model ---")
+    }
   }
 
   /**
