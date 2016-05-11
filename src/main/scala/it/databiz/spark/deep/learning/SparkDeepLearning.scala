@@ -37,7 +37,7 @@ object SparkDeepLearning extends App {
 
   // Create Spark context
   val sc = new SparkContext(new SparkConf()
-    .setMaster("local[" + numCores + "]")     // Edit this line if you intend to use a different master node.
+    .setMaster(s"local[$numCores]")     // Edit this line if you intend to use a different master node.
     .setAppName("Spark-Deep-Learning")
     .set(SparkDl4jMultiLayer.AVERAGE_EACH_ITERATION, String.valueOf(true)))
 
@@ -61,7 +61,7 @@ object SparkDeepLearning extends App {
   (0 to epochs).foreach { i =>
     // We are training with approximately 'batchSize' examples on each executor core
     val network = sparkNeuralNetwork.fitDataSet(sparkTrainingData, numCores * batchSize)
-    log.info("--- Epoch " + i + " complete ---")
+    log.info(s"--- Epoch $i complete ---")
     log.info(network.evaluateOn(testSet).stats)
   }
 
