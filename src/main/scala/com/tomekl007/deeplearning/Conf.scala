@@ -15,7 +15,7 @@
   * along with this program.  If not, see <http://www.gnu.org/licenses/>.
   */
 
-package it.databiz.spark.deep.learning
+package com.tomekl007.deeplearning
 
 import com.typesafe.config._
 
