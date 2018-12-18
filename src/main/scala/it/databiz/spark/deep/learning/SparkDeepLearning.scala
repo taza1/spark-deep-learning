@@ -1,20 +1,3 @@
-/**
-  * Copyright (C) 2016  Databiz s.r.l.
-  *
-  * This program is free software: you can redistribute it and/or modify
-  * it under the terms of the GNU General Public License as published by
-  * the Free Software Foundation, either version 3 of the License, or
-  * (at your option) any later version.
-  *
-  * This program is distributed in the hope that it will be useful,
-  * but WITHOUT ANY WARRANTY; without even the implied warranty of
-  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  * GNU General Public License for more details.
-  *
-  * You should have received a copy of the GNU General Public License
-  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
-  */
-
 package it.databiz.spark.deep.learning
 
 import it.databiz.spark.deep.learning.Conf._
@@ -29,7 +12,7 @@ object SparkDeepLearning {
 
   def main(args: Array[String]): Unit = {
     // Create logger
-    val log = LoggerFactory.getLogger("it.databiz.spark.deep.learning.MnistExample")
+    val log = LoggerFactory.getLogger(SparkDeepLearning.getClass)
 
     // Create Spark context
     val sc = new SparkContext(new SparkConf()
