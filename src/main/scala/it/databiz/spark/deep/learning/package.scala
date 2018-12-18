@@ -13,12 +13,6 @@ import org.nd4j.linalg.factory.Nd4j
 import scala.collection.JavaConverters._
 import scala.util.Try
 
-/**
-  * Container object of Scala implicits to use in order to train a Convolutional Neural Network
-  * from the MNIST dataset, taking advantage of Apache Spark's cluster computing.
-  *
-  * Created by Vincibean <andrebessi00@gmail.com> on 26/03/16.
-  */
 package object learning {
 
   /**

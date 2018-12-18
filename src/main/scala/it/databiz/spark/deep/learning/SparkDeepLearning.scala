@@ -25,12 +25,6 @@ import org.deeplearning4j.nn.multilayer.MultiLayerNetwork
 import org.deeplearning4j.spark.impl.multilayer.SparkDl4jMultiLayer
 import org.slf4j.LoggerFactory
 
-/**
-  * Scala object containing the main method to use in order to train a Convolutional Neural Network
-  * from the MNIST dataset, taking advantage of Apache Spark's cluster computing.
-  *
-  * Created by Vincibean <andrebessi00@gmail.com> on 19/03/16.
-  */
 object SparkDeepLearning {
 
   def main(args: Array[String]): Unit = {

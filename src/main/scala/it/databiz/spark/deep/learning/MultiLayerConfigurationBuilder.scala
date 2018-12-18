@@ -24,12 +24,6 @@ import org.deeplearning4j.nn.conf.{MultiLayerConfiguration, NeuralNetConfigurati
 import org.deeplearning4j.nn.weights.WeightInit
 import org.nd4j.linalg.lossfunctions.LossFunctions
 
-/**
-  * A dedicated MultiLayerConfiguration Builder to use in order to train a Convolutional Neural Network
-  * from the MNIST dataset, taking advantage of Apache Spark's cluster computing.
-  *
-  * Created by Vincibean <andrebessi00@gmail.com> on 20/03/16.
-  */
 object MultiLayerConfigurationBuilder extends MultiLayerConfiguration.Builder {
 
   def apply(): MultiLayerConfiguration.Builder = new NeuralNetConfiguration.Builder()

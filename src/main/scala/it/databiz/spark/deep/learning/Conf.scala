@@ -19,13 +19,6 @@ package it.databiz.spark.deep.learning
 
 import com.typesafe.config._
 
-/**
-  * Common configurations to use in order to train a Convolutional Neural Network
-  * from the MNIST dataset, taking advantage of Apache Spark's cluster computing.
-  * This Scala object is intended to be used as an implicit.
-  *
-  * Created by Vincibean <andrebessi00@gmail.com> on 19/03/16.
-  */
 object Conf {
 
   // Load the configuration values from the default location: application.conf
