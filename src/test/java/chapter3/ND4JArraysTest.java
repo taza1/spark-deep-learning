@@ -8,22 +8,22 @@ import java.util.Arrays;
 
 public class ND4JArraysTest {
 
-  private static int nRows = 3;
-  private static int nColumns = 5;
-  private static int[] shape = new int[]{nRows, nColumns};
+  private static int NUMBER_OF_ROWS = 5;
+  private static int NUMBER_OF_COLUMNS = 6;
+  private static int[] shape = new int[]{NUMBER_OF_ROWS, NUMBER_OF_COLUMNS};
 
   @Test
   public void shouldCreateArrayFromFactoryMethods() {
-    INDArray allZeros = Nd4j.zeros(nRows, nColumns);
-    System.out.println("Nd4j.zeros(nRows, nColumns)");
+    INDArray allZeros = Nd4j.zeros(NUMBER_OF_ROWS, NUMBER_OF_COLUMNS);
+    System.out.println("Nd4j.zeros(NUMBER_OF_ROWS, NUMBER_OF_COLUMNS)");
     System.out.println(allZeros);
 
-    INDArray allOnes = Nd4j.ones(nRows, nColumns);
-    System.out.println("\nNd4j.ones(nRows, nColumns)");
+    INDArray allOnes = Nd4j.ones(NUMBER_OF_ROWS, NUMBER_OF_COLUMNS);
+    System.out.println("\nNd4j.ones(NUMBER_OF_ROWS, NUMBER_OF_COLUMNS)");
     System.out.println(allOnes);
 
-    INDArray allTens = Nd4j.valueArrayOf(nRows, nColumns, 10.0);
-    System.out.println("\nNd4j.valueArrayOf(nRows, nColumns, 10.0)");
+    INDArray allTens = Nd4j.valueArrayOf(NUMBER_OF_ROWS, NUMBER_OF_COLUMNS, 10.0);
+    System.out.println("\nNd4j.valueArrayOf(NUMBER_OF_ROWS, NUMBER_OF_COLUMNS, 10.0)");
     System.out.println(allTens);
 
   }

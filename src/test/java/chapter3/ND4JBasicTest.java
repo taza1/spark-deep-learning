@@ -10,8 +10,8 @@ public class ND4JBasicTest {
 
   @Test
   public void shouldCreateMatrix() {
-    int nRows = 2;
-    int nColumns = 3;
+    int nRows = 3;
+    int nColumns = 4;
     INDArray myArray = Nd4j.zeros(nRows, nColumns);
 
     System.out.println("Basic INDArray information:");
@@ -36,8 +36,8 @@ public class ND4JBasicTest {
 
   @Test
   public void shouldPopulateArray() {
-    int nRows = 2;
-    int nColumns = 3;
+    int nRows = 4;
+    int nColumns = 10;
     INDArray myArray = Nd4j.zeros(nRows, nColumns);
     double val0 = myArray.getDouble(0, 1);
     System.out.println("\nValue at (0,1):     " + val0);
