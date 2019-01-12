@@ -1,4 +1,5 @@
-package com.tomekl007.deeplearning
+package chapter2
+
 
 import Conf._
 import org.apache.spark.{SparkConf, SparkContext}

@@ -26,3 +26,5 @@ libraryDependencies += "org.deeplearning4j" % "dl4j-spark" % "0.4-rc3.8"
 
 // Typesafe dependencies
 libraryDependencies += "com.typesafe" % "config" % "1.3.0"
+
+libraryDependencies += "org.scalatest" %% "scalatest" % "3.0.5" % Test

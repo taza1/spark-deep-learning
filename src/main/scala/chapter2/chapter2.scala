@@ -1,5 +1,3 @@
-package com.tomekl007
-
 import java.io.{DataOutputStream, File}
 import java.nio.file.{Files, Paths}
 
@@ -13,7 +11,7 @@ import org.nd4j.linalg.factory.Nd4j
 import scala.collection.JavaConverters._
 import scala.util.Try
 
-package object deeplearning {
+package object chapter2 {
 
   /**
     * MnistDataSetIterator wrapper, loads the dataset that should be used in order to
